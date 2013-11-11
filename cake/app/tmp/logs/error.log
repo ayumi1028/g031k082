@@ -1,0 +1,20 @@
+2013-10-31 14:30:25 Error: Fatal Error (4): syntax error, unexpected ''DebugKit.Toolbar);' (T_ENCAPSED_AND_WHITESPACE), expecting ')' in [/home/g031k082/public_html/cake/app/Controller/HelloController.php, line 4]
+2013-10-31 14:30:25 Error: [FatalErrorException] syntax error, unexpected ''DebugKit.Toolbar);' (T_ENCAPSED_AND_WHITESPACE), expecting ')'
+Request URL: /~g031k082/cake/hello
+Stack Trace:
+#0 /home/g031k082/public_html/cake/lib/Cake/Error/ErrorHandler.php(184): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/home/g031k082/...', 4)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/home/g031k082/...', 4, Array)
+#2 /home/g031k082/public_html/cake/lib/Cake/Core/App.php(931): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/home/g031k082/...', 4, Array)
+#3 /home/g031k082/public_html/cake/lib/Cake/Core/App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-10-31 14:31:23 Error: Fatal Error (4): syntax error, unexpected ''DebugKit.Toolbar);' (T_ENCAPSED_AND_WHITESPACE), expecting ')' in [/home/g031k082/public_html/cake/app/Controller/HelloController.php, line 4]
+2013-10-31 14:31:23 Error: [FatalErrorException] syntax error, unexpected ''DebugKit.Toolbar);' (T_ENCAPSED_AND_WHITESPACE), expecting ')'
+Request URL: /~g031k082/cake/hello
+Stack Trace:
+#0 /home/g031k082/public_html/cake/lib/Cake/Error/ErrorHandler.php(184): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/home/g031k082/...', 4)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/home/g031k082/...', 4, Array)
+#2 /home/g031k082/public_html/cake/lib/Cake/Core/App.php(931): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/home/g031k082/...', 4, Array)
+#3 /home/g031k082/public_html/cake/lib/Cake/Core/App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
