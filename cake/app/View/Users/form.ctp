@@ -17,7 +17,7 @@
 		));
 	//性別
 	echo "性別";
-	echo "<br />";
+	echo $this->html->tag('br /');
 	echo $this->Form->radio('join.sex', array(
 		'0' => '男','1' => '女'),
 		array('legend' => false, 'value' => '1')
@@ -25,18 +25,18 @@
 
 	//学年
 	echo "学年";
-	echo "<br />";
+	echo $this->html->tag('br /');
 	echo $this->Form->select('join.gakunen', 
 		array('0' => '学部1年', 
 			'1' => '学部2年',
 			'2' => '学部3年',
 			'3' => '学部4年'),
 		array('value' => '1'));
-	echo "<br />";
+	echo $this->html->tag('br /');
 
 	//好きなもの
 	echo "好きなもの";
-	echo "<br />";
+	echo $this->html->tag('br /');
 	echo $this->Form->checkbox('join.like.a', array('value' => '運動','checked' => true));
 	echo $this->Form->label('join.like.a', '運動');
 	echo $this->Form->checkbox('join.like.b', array('value' => '漫画','checked' => false));
@@ -57,6 +57,6 @@
 	echo $this->Form->hidden('join.jikan', array(
 		'value' => $now));
 
-	echo $this->Form->submit('送信', array('name' => 'button'));
+	echo $this->Form->submit('送信', sarray('name' => 'button'));
 	echo $this->Form->end();
 	?>
