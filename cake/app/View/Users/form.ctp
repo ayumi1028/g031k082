@@ -57,6 +57,6 @@
 	echo $this->Form->hidden('join.jikan', array(
 		'value' => $now));
 
-	echo $this->Form->submit('送信', sarray('name' => 'button'));
+	echo $this->Form->submit('送信', array('name' => 'button'));
 	echo $this->Form->end();
 	?>
