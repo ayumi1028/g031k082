@@ -5,13 +5,7 @@ class HogeController extends AppController{
 	public $compontents = array('Debugkit.Toolbar');
 	//クラスについて
 	public function index(){ //アクション
-	// 	$url = "http://b.hatena.ne.jp/rsksound/favorite.rss";
-	// 	$contents = simplexml_load_file($url);
-	// 	//debug($contents);
-	// 	echo $contents->channel->title;
-	// 	echo "<br />";
-	// for($i = 0; $i < )
-	// 	echo $contents->item[i]->title;
+	
 	}
 
 	public function show(){

@@ -43,7 +43,7 @@
 	echo $this->Form->label('join.like.b', '漫画');
 	echo $this->Form->checkbox('join.like.c', array('value' => '女の子','checked' => true));
 	echo $this->Form->label('join.like.c', '女の子');
-	echo "<br />";
+	echo $this->html->tag('br /');
 
 	//コメント
 	echo "コメント";
