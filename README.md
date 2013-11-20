@@ -19,3 +19,7 @@ g031k082
 
 - 発展課題1
 [動作ページ](http://49.212.46.130/~g031k082/kadai6.php)
+
+- 発展課題2
+[コード](https://github.com/ayumi1028/g031k082/blob/master/cake/kadai62.php)
+
