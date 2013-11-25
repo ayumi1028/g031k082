@@ -1,5 +1,5 @@
 <?php 
-	echo $this->html->link('投稿する','/Boards/create/', array('name' =>'toukou'));
+	echo $mes;
 	echo $this->html->tag('br /');
  	foreach($data as $key){ 
  	$id = $key['Board']['id'];
