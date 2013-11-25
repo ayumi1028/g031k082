@@ -1,8 +1,8 @@
 @charset "utf-8";
 
 body{
-	background: #FFFFCC;
-	font-family: cursive;
+	/*background: #FFFFCC;*/
+	background-image: url(http://www.wakyoku.com/yoshikawakana/_src/sc605/kana_haikei02.jpg);
 }
 
 #container{
@@ -11,14 +11,19 @@ body{
 
 #header {
 	line-height:50px;
-	background: #CCFFCC; /*背景の色*/
-	color: #FFCCFF; /*文字の色*/
+	color: #FA8072; /*文字の色*/
 }
 
 #content{
+	font-family: cursive;
+}
 
+#right {
+	float:right;
+	width:200px;
+	background-color:#CCFFCC;
 }
 
 #footer {
-	background-color:#CCFFCC; 
+	color: #FA8072; /*文字の色 */
 }
