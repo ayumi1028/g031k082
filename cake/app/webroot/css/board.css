@@ -11,7 +11,7 @@ body{
 
 #header {
 	line-height:50px;
-	color: #FA8072; /*文字の色*/
+	color: #F08080; /*文字の色*/
 }
 
 #content{
@@ -25,5 +25,5 @@ body{
 }
 
 #footer {
-	color: #FA8072; /*文字の色 */
+	color: #F08080; /*文字の色 */
 }
