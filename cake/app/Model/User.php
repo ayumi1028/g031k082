@@ -5,10 +5,16 @@
         public $validate = array(
             'name' => array(
                 'name1' => array(
+                'rule' => array('between',0,10),
+                'required' => true,
+                'alloEmpty' => false,
+                'message' => '10文字以内で入力して下さい'
+                ),
+                'name2' => array(
                     'rule' => 'isUnique',
                     'message' => 'このユーザは既に登録されています'
                 ),
-                'name2' => array(
+                'name3' => array(
                     'rule' => array('custom', '/^[a-zA-Z]+$/'),
                     'message' => '半角英字で入力してください'
                 )
