@@ -7,7 +7,7 @@
     echo $this->Form->input('User.pass_check',array('label'=>'パスワード確認','type'=>"password")); 
     echo $this->Form->input('User.email',array('label'=>'メールアドレス'));
     $option = array(0 => '男', 1 => '女');
-    $option2 = array('legend' => false, 'value' => 1);
+    $option2 = array('legend' => false);
     echo $this->Form->label('User.sex','性別');
     echo $this->Form->radio('User.sex',$option,$option2); 
     echo $this->Form->end('新規ユーザを作成する'); ?>

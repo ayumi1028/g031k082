@@ -119,8 +119,7 @@
 			$this->redirect(array('action'=>'index')); 	
 		}
 		public function search(){
-			if(isset($this->request->data['sea'])){
-				debug($this->request->data);
+			if(!empty($this->request->data['sea'])){
 			$num = $this->request->data['search']['num'];
 			$word = $this->request->data['search']['word'];
 			$this->set('data', $this->Board->find('all', array('limit' => $num,'conditions' => array('Board.comment like' => '%'.$word.'%'))));

@@ -25,6 +25,12 @@
                 'alloEmpty' => false,
                 'message' => '必ず入力して下さい'
             ),
+            'sex' => array(
+                'rule' => array('notEmpty'),
+                'required' => true,
+                'alloEmpty' => false,
+                'message' => '必ず入力して下さい'
+                )
         );
     }
 ?>
