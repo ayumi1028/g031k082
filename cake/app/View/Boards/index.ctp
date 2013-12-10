@@ -35,13 +35,13 @@
 	echo $this->html->tag('br /');
  	foreach($data as $key){ 
 	 	$id = $key['Board']['id'];
-	 	echo $key['User']['name'].'　';
-	 	echo $key['User']['email'].'　';
-		echo $key['Board']['comment'].'　';
-		echo $key['Board']['created'].'　';
-			if($user['id'] == $key['User']['id']){
-				echo $this->html->link('編集','/boards/edit/'.$id).'　';
-				echo $this->html->link('×','/boards/delete/'.$id);
+	 		echo $key['User']['name'].'　';
+	 		echo $key['User']['email'].'　';
+			echo $key['Board']['comment'].'　';
+			echo $key['Board']['created'].'　';
+		if($user['id'] == $key['User']['id']){
+			echo $this->html->link('編集','/boards/edit/'.$id).'　';
+			echo $this->html->link('×','/boards/delete/'.$id);
 		}
 		echo $this->html->tag('br /');
 	}

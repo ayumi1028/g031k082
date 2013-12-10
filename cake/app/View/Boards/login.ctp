@@ -20,8 +20,8 @@ else: /* ログイン済みの場合はログアウトアクションへのリ�
 
 <?php
 if(empty($user)): /* 未ログインの場合はFormヘルパーを使って認証ボタンを表示 */ 
-     echo $this->Form->create('Fbconnects',
-        array('action'=>'facebook'));
+     echo $this->Form->create('',
+        array('controller' => 'boards', 'action'=>'facebook'));
      echo $this->Form->end(__('Facebook で Login'));
 else: /* ログイン済みの場合はログアウトアクションへのリンクを表示 */ 
     echo 'ログイン済みです。';

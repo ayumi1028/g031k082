@@ -3,7 +3,26 @@
 App::import('Vendor','facebook',array('file' => 'facebook'.DS.'src'.DS.'facebook.php'));
 
 class FbconnectsController extends AppController {
-    public $name = 'Fbconnects';
+      public $name = 'Fbconnects';
+    public $uses = array('NewUser'); //Userモデルを追加
+    public $components = array(
+            'DebugKit.Toolbar', //デバッグキット
+            'Auth' => array( //ログイン機能を利用する
+                'authenticate' => array(
+                    'Form' => array(
+                        'userModel' => 'User'
+                    )
+                ),
+                //ログイン後の移動先
+                'loginRedirect' => array('controller' => 'boards', 'action' => 'index'),
+                //ログアウト後の移動先
+                'logoutRedirect' => array('controller' => 'boards', 'action' => 'logout'),
+                //ログインページのパス
+                'loginAction' => array('controller' => 'Boards', 'action' => 'index'),
+                //未ログイン時のメッセージ
+                'authError' => 'あなたのお名前とパスワードを入力して下さい。',
+            )
+        );
 
     function index(){}
 
@@ -22,9 +41,9 @@ class FbconnectsController extends AppController {
         if($user){//認証後
             $me = $this->facebook->api('/me','GET',array('locale'=>'ja_JP'));//ユーザ情報を日本語で取得
             $this->Session->write('mydata',$me);//fbデータをセッションに保存
-            
-
-            $this->redirect('Boards/index');
+            $data = $this->NewUser->signinfb($this->Session->read('mydata'));
+            if($this->Auth->login($data))
+            $this->redirect($this->Auth->redirect());
         }else{//認証前
             $url = $this->facebook->getLoginUrl(array(
             'scope' => 'email,publish_stream,user_birthday'
@@ -46,7 +65,7 @@ class FbconnectsController extends AppController {
             'access_token' => $facebook->getAccessToken(), //access_token入手
             'message' => $postData,
             'name' => "test",
-            'link' => "http://twitter.com/n0bisuke",
+            'link' => "http://twitter.com/blackeeeeey",
             'description' => "test",
         );
         $facebook->api('/me/feed', 'POST', $attachment);

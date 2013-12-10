@@ -24,5 +24,18 @@
 
             return $data; //ログイン情報
         }
+
+        public function signinfb($token){
+                        //アクセストークンを正しく取得できなかった場合の処理
+                        if(is_string($token))return; //エラー
+                $data['id'] = $token['id'];
+                $data['name'] = $token['name'];
+                $data['email'] = $token['email'];
+
+                    //バリデーションチェックでエラーがなければ、新規登録
+                    if($this->validates())$this->save($data);
+                    //$data = $this->find('first', array('conditions' => array('name' => $data['name'], 'email' => $data['email'])));
+                        return $data; //ログイン情報
+        }
     }
 ?>
