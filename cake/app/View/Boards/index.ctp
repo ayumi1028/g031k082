@@ -8,13 +8,13 @@
 				'type' => 'post', 
 				'url' => 'index'
 				 ));
-	echo $this->Form->submit('昇順', array('name' => 'syoujun'));
+	echo $this->Form->submit('コメントが古い順', array('name' => 'syoujun'));
 	echo $this->Form->end();
 	echo $this->Form->create('desc', array(
 				'type' => 'post', 
 				'url' => 'index'
 				 ));
-	echo $this->Form->submit('降順', array('name' => 'koujun'));
+	echo $this->Form->submit('コメントが新しい順', array('name' => 'koujun'));
 	echo $this->Form->end();
 	//コメント検索 
 	echo $this->Form->create('search', array(
@@ -39,9 +39,9 @@
 	 	echo $key['User']['email'].'　';
 		echo $key['Board']['comment'].'　';
 		echo $key['Board']['created'].'　';
-		if($user['id'] == $key['User']['id']){
-			echo $this->html->link('編集','/boards/edit/'.$id).'　';
-			echo $this->html->link('×','/boards/delete/'.$id);
+			if($user['id'] == $key['User']['id']){
+				echo $this->html->link('編集','/boards/edit/'.$id).'　';
+				echo $this->html->link('×','/boards/delete/'.$id);
 		}
 		echo $this->html->tag('br /');
 	}

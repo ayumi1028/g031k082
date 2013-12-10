@@ -76,4 +76,12 @@ class DATABASE_CONFIG {
 		'prefix' => '',
 		//'encoding' => 'utf8',
 	);
+
+	var $twitter = array(
+		'datasource' => 'TwitterKit.TwitterSource',
+		'oauth_consumer_key'    => '0SvE41f1HTOfwYq0x4EAwA',
+        'oauth_consumer_secret' => 'j4wHR9LumdICPTWlpYkEhOkez12S7PqIqcPKLCJRZF0',
+        'oauth_callback'    => '/Boards/oauth_callback',
+    );
+
 }

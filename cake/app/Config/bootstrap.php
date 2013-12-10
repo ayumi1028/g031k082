@@ -108,3 +108,5 @@ CakeLog::config('error', array(
 	'file' => 'error',
 ));
 CakePlugin::load('DebugKit');
+/*TwitterKitの導入*/
+CakePlugin::load('TwitterKit');

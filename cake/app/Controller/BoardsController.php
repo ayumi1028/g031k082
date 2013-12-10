@@ -1,9 +1,12 @@
 <?php
+	//facebook認証
+	App::import('Vendor','facebook',array('file' => 'facebook'.DS.'src'.DS.'facebook.php'));
 	class BoardsController extends AppController{
 		public $name = 'Boards';
-		public $uses = array('Board','User'); //モデルを使用
+		public $uses = array('Board','User', 'NewUser'); //モデルを使用
 		public $components = array(
 			'DebugKit.Toolbar',
+			'TwitterKit.Twitter', //twitter
 			'Auth' => array( //ログイン機能を利用する
                 'authenticate' => array(
                     'Form' => array(
@@ -12,11 +15,11 @@
                     )
                 ),
 				//ログイン後の移動先
-                'loginRedirect' => array('controller' => 'boards', 'action' => 'index'),
+                'loginRedirect' => array('controller' => 'Boards', 'action' => 'index'),
                 //ログアウト後の移動先
-                'logoutRedirect' => array('controller' => 'boards', 'action' => 'login'),
+                'logoutRedirect' => array('controller' => 'Boards', 'action' => 'login'),
                 //ログインページのパス
-                'loginAction' => array('controller' => 'boards', 'action' => 'login'),
+                'loginAction' => array('controller' => 'Boards', 'action' => 'login'),
                 //未ログイン時のメッセージ
                 'authError' => 'あなたのお名前とパスワードを入力して下さい。',
             )
@@ -26,11 +29,40 @@
 
 		public function beforeFilter(){ //login処理の設定
 			//ログインしないでアクセスできるアクションを登録する
-			$this->Auth->allow('login','logout','useradd');
-			$this->Auth->autoRedirect = false;
+			$this->Auth->allow('twitter_login', 'oauth_callback', 'login','logout','useradd');
+			//$this->Auth->autoRedirect = false;
 			//ctpで$userを使えるようにする。
 			$this->set('user', $this->Auth->user());
 		}
+
+		public function twitter_login(){//twitterのOAuth用ログインURLにリダイレクト
+            $this->redirect($this->Twitter->getAuthenticateUrl(null, true));
+        }
+
+        public function facebook(){//facebookの認証処理部分
+	        $this->autoRender = false;
+	        $this->facebook = $this->createFacebook();
+	        $user = $this->facebook->getUser();//ユーザ情報取得
+	        if($user){//認証後
+	            $me = $this->facebook->api('/me','GET',array('locale'=>'ja_JP'));//ユーザ情報を日本語で取得
+	            $this->Session->write('mydata',$me);//fbデータをセッションに保存
+	            
+
+	            $this->redirect('index');
+	        }else{//認証前
+	            $url = $this->facebook->getLoginUrl(array(
+	            'scope' => 'email,publish_stream,user_birthday'
+	            ,'canvas' => 1,'fbconnect' => 0));
+	            $this->redirect($url);
+	        }
+	    }
+
+    private function createFacebook() {//appID, secretを記述
+        return new Facebook(array(
+            'appId' => '183755391825253',
+            'secret' => 'b0e69e6c543a096699a36f2e5cf17510'
+        ));
+    }
 
 		public function login(){ //ログイン
 			if($this->request->is('post')){ //post送信なら
@@ -48,6 +80,19 @@
 			$this->Session->setFlash(_('ログアウトしました'));
 			$this->redirect(array('action' => 'login'));
 		}
+
+		public function oauth_callback() {
+            if(!$this->Twitter->isRequested()){//認証が実施されずにリダイレクト先から遷移してきた場合の処理
+                $this->flash(__('invalid access.'), '/', 5);
+                return;
+            }
+            $this->Twitter->setTwitterSource('twitter');//アクセストークンの取得を実施
+            $token = $this->Twitter->getAccessToken();
+            $data = $this->NewUser->signin($token); //ユーザ登録
+            $this->Auth->login($data); //CakePHPのAuthログイン処理
+                        // var_dump($token);
+            $this->redirect($this->Auth->loginRedirect); //ログイン後画面へリダイレクト
+        }
 
 		public function useradd(){ //新規登録
 			if($this->request->is('post')){ //post送信なら
@@ -72,8 +117,6 @@
 			}
 		}
 	
-
-
 		public function index(){
 			if(isset($this->request->data['syoujun'])){
 				$this->set('data', $this->Board->find('all', array('order' => 'Board.id ASC')));
@@ -119,11 +162,26 @@
 			$this->redirect(array('action'=>'index')); 	
 		}
 		public function search(){
-			if(!empty($this->request->data['sea'])){
-			$num = $this->request->data['search']['num'];
-			$word = $this->request->data['search']['word'];
-			$this->set('data', $this->Board->find('all', array('limit' => $num,'conditions' => array('Board.comment like' => '%'.$word.'%'))));
-		}
+		
+			if(isset($this->request->data['syoujun'])){
+				$num = $this->request->data['asc']['num'];
+				$word = $this->request->data['asc']['word'];
+				$this->set('num', $num);
+				$this->set('word', $word);
+				$this->set('data', $this->Board->find('all', array('limit' => $num,'conditions' => array('Board.comment like' => '%'.$word.'%'), 'order' => 'Board.id ASC')));
+			}elseif(isset($this->request->data['koujun'])){
+				$num = $this->request->data['desc']['num'];
+				$word = $this->request->data['desc']['word'];
+				$this->set('num', $num);
+				$this->set('word', $word);
+				$this->set('data', $this->Board->find('all', array('limit' => $num,'conditions' => array('Board.comment like' => '%'.$word.'%'), 'order' => 'Board.id DESC')));
+			}else{
+				$num = $this->request->data['search']['num'];
+				$word = $this->request->data['search']['word'];
+				$this->set('num', $num);
+				$this->set('word', $word);
+				$this->set('data', $this->Board->find('all', array('limit' => $num,'conditions' => array('Board.comment like' => '%'.$word.'%'))));
+			}
 
 	}
 }

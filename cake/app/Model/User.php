@@ -26,17 +26,23 @@
                 'message' => 'メールアドレスの形式で必ず入力して下さい'
                 ),
             'password' => array(
+                'password1' => array( 
                 'rule' => 'alphaNumeric',
                 'required' => true,
                 'alloEmpty' => false,
-                'message' => '必ず入力して下さい'
+                'message' => '半角英数字で入力して下さい'
+                ),
+                'password2' => array(
+                'rule' => array('notEmpty'),
+                'message' => '必ず入力して下さい' 
+                )
             ),
             'sex' => array(
                 'rule' => array('notEmpty'),
                 'required' => true,
                 'alloEmpty' => false,
                 'message' => '必ず入力して下さい'
-                )
+            )
         );
     }
 ?>
