@@ -13,6 +13,16 @@ g031k082
 [動作ページ](http://49.212.46.130/~g031k082/cake/boards/login)
 [コード](https://github.com/ayumi1028/g031k082/blob/master/cake/app/Controller/BoardsController.php)
 
+第9回 課題
+----------------
+- 基礎課題1
+[動作ページ](http://49.212.46.130/~g031k082/cake/boards/login)
+[コード](https://github.com/ayumi1028/g031k082/blob/master/cake/app/Controller/BoardsController.php)
+
+- 基礎課題2
+[動作ページ](http://49.212.46.130/~g031k082/cake/boards/login)
+[コード](https://github.com/ayumi1028/g031k082/blob/master/cake/app/Controller/BoardsController.php)
+
 第7回 課題
 ----------------
 - 基礎課題1
