@@ -7,6 +7,7 @@
 		public $components = array(
 			'DebugKit.Toolbar',
 			'TwitterKit.Twitter', //twitter
+			'RequestHandler', //Mobile版かPC版か判断する
 			'Auth' => array( //ログイン機能を利用する
                 'authenticate' => array(
                     'Form' => array(
@@ -40,6 +41,9 @@
         }
 
 		public function login(){ //ログイン
+			if($this->RequestHandler->isMobile()){
+				$this->layout = 'jquery';
+			}
 			if($this->request->is('post')){ //post送信なら
 				if($this->Auth->login()){ //ログイン成功なら
 					return $this->redirect($this->Auth->redirect());//Auth指定のログインページへ移動
@@ -50,6 +54,9 @@
 		}
 
 		public function logout(){ //ログアウト
+			if($this->RequestHandler->isMobile()){
+				$this->layout = 'jquery';
+			}
 			$this->Auth->logout();
 			$this->Session->destroy(); //セッションを完全削除
 			$this->Session->setFlash(_('ログアウトしました'));
@@ -116,6 +123,9 @@
         }
 
 		public function useradd(){ //新規登録
+			if($this->RequestHandler->isMobile()){
+				$this->layout = 'jquery';
+			}
 			if($this->request->is('post')){ //post送信なら
 				//入力したパスワードとパスチェックの値が一致した場合
 				if($this->request->data['User']['pass_check'] == $this->request->data['User']['password']){
@@ -139,6 +149,9 @@
 		}
 	
 		public function index(){
+			if($this->RequestHandler->isMobile()){
+				$this->layout = 'jquery';
+			}
 			if(isset($this->request->data['syoujun'])){
 				$this->set('data', $this->Board->find('all', array('order' => 'Board.id ASC')));
 			}elseif(isset($this->request->data['koujun'])){
@@ -148,7 +161,11 @@
 			//Boardsテーブルの情報を取得
 			}
 		}
+
 		public function create(){
+			if($this->RequestHandler->isMobile()){
+				$this->layout = 'jquery';
+			}
 			if(isset($this->request->data['board']['comment'])){ //投稿されたか否か
 				//1回目に投稿されたデータをcreate.ctpのelse文の中に持っていく
 				$this->set('wara', $this->request->data['board']['comment']);
@@ -163,6 +180,9 @@
 		}
 
 		public function edit($id = null){
+			if($this->RequestHandler->isMobile()){
+				$this->layout = 'jquery';
+			}	
 			//idがnullじゃなかったら
 			if($id != null){
 				//id情報を取得
@@ -184,6 +204,9 @@
 			$this->redirect(array('action'=>'index')); 	
 		}
 		public function search(){
+			if($this->RequestHandler->isMobile()){
+				$this->layout = 'jquery';
+			}
 		
 			if(isset($this->request->data['syoujun'])){
 				$num = $this->request->data['asc']['num'];
